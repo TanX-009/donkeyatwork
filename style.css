@@ -63,6 +63,13 @@ body {
 
 .row > div {
   float: left;
+  padding: 1.5rem;
+}
+
+#div1,
+#div2,
+#div3 {
+  width: 100%;
   background: #999999;
   border: 0.3rem solid black;
   border-radius: 0.5rem;
