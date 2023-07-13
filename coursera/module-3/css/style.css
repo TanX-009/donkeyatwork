@@ -20,7 +20,7 @@ body {
   text-decoration: none;
 }
 .navbar-brand h1 {
-  font-family: "Lora", serif;
+  font-family: "Righteous", serif;
   color: #643843;
   font-size: 1.7em;
   text-transform: uppercase;
@@ -70,12 +70,6 @@ body {
   font-size: 1em;
 }
 
-@media (min-width: 1200px) {
-}
-@media (min-width: 992px) and (max-width: 1199px) {
-}
-@media (min-width: 768px) and (max-width: 991px) {
-}
 @media (max-width: 767px) {
   .navbar-brand {
     padding-top: 10px;
