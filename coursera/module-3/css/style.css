@@ -1,8 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Righteous&display=swap");
+
 body {
   font-size: 16px;
   color: #fff;
   background-color: #61122f;
-  font-family: "Oxygen", sans-serif;
+  font-family: "Anton", sans-serif;
 }
 
 #header-nav {
@@ -20,7 +22,8 @@ body {
   text-decoration: none;
 }
 .navbar-brand h1 {
-  font-family: "Righteous", serif;
+  font-family: "Righteous", cursive;
+
   color: #643843;
   font-size: 1.7em;
   text-transform: uppercase;
@@ -31,6 +34,10 @@ body {
   margin-bottom: 0;
   line-height: 0.75;
   padding-bottom: 20px;
+}
+
+h2 {
+  font-size: 3em;
 }
 
 #nav-list {
@@ -61,13 +68,15 @@ body {
   height: 200vh;
 }
 
+#home-tiles .item-text p {
+  font-size: 1em;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 #home-tiles .item-text p:nth-of-type(1) {
   font-size: 2em;
   font-weight: 500;
-}
-
-#home-tiles .item-text p {
-  font-size: 1em;
+  font-family: "Anton", sans-serif;
 }
 
 @media (max-width: 767px) {
