@@ -21,14 +21,14 @@ html {
 /* 2160 / 16px = 135 */
 @media (max-width: 135em) {
   html {
-    font-size: 80%;
+    font-size: 70%;
   }
 }
 
 /* 1440px / 16px = 87.5 */
 @media (max-width: 87.5em) {
   html {
-    font-size: 70%;
+    font-size: 60%;
   }
 }
 
@@ -78,7 +78,7 @@ body {
 h1 {
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   font-size: 5rem;
-  padding: 7%;
+  padding: 5%;
   text-align: center;
 }
 
