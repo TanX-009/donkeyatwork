@@ -1,0 +1,25 @@
+{
+  "name": "donkeyatwork",
+  "version": "1.0.0",
+  "description": "Repo for study stuff",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TanX-009/donkeyatwork.git"
+  },
+  "author": "TanX-009",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TanX-009/donkeyatwork/issues"
+  },
+  "homepage": "https://github.com/TanX-009/donkeyatwork#readme",
+  "devDependencies": {
+    "eslint": "^8.44.0"
+  }
+}
