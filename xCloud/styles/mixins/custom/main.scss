@@ -1,0 +1,23 @@
+@mixin button($color: var(--txt-b), $bg: var(--pri), $shadow: var(--pri-d)) {
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+
+  outline: none;
+  border: none;
+  box-shadow: 0 0.4rem 0 $shadow;
+
+  color: $color;
+  background: $bg;
+
+  &:active {
+    transform: translateY(0.4rem);
+    box-shadow: 0 0 0 $shadow;
+  }
+}
+
+@mixin gradient-title($angle, $colors...) {
+  background: -webkit-linear-gradient($angle + deg, $colors);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

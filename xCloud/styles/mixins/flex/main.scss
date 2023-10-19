@@ -1,0 +1,26 @@
+@mixin fl($direction, $jc: flex-start, $ai: stretch, $gap: 0) {
+  display: flex;
+
+  // direction
+  @if ($direction == "r") {
+    flex-direction: row;
+  } @else if ($direction == "c") {
+    flex-direction: column;
+  }
+
+  // justify-content
+  @if ($jc == "c") {
+    justify-content: center;
+  } @else {
+    justify-content: $jc;
+  }
+
+  // align-items
+  @if ($ai == "c") {
+    align-items: center;
+  } @else {
+    align-items: $ai;
+  }
+
+  gap: $gap;
+}

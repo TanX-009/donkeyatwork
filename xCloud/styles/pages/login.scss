@@ -1,0 +1,38 @@
+.loginContainer {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+
+  @include fl("c", "c", "c", 2rem);
+
+  font-size: 3rem;
+}
+
+.login {
+  width: 40%;
+  padding: 2rem;
+  border: 1px solid #000;
+
+  @include fl("c", "c", "c", 1rem);
+
+  button {
+    padding: 1rem 2rem;
+
+    @include button;
+  }
+}
+
+.field {
+  width: 100%;
+
+  @include fl("c", "c", flex-start, 0.1rem);
+
+  label {
+    font-weight: 500;
+    @include gradient-title(45, var(--pri), var(--sec));
+  }
+  input {
+    width: 100%;
+    font-size: inherit;
+  }
+}
