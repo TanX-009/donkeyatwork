@@ -3,8 +3,11 @@
 // Mixins
 @import "./mixins/main.scss";
 
-// Login
-@import "./pages/login.scss";
+// Layout
+@import "./layout.scss";
+
+// pages
+@import "./pages/main.scss";
 
 /* Base reset */
 * {
@@ -14,31 +17,56 @@
 
 /* colors */
 :root {
-  --pri-b: #bac8ff;
-  --pri: #7692ff;
-  --pri-d: #4f61ab;
+  --txt: #fef9ec;
+  --txt-a: #f8d26d;
+  --bg-pri: #140f00;
+  --bg-pri-a: #181201;
+  --bg-sec: #312303;
+  --bg-sec-a: #483505;
+  --bg-ter: #614705;
+  --bg-ter-a: #795906;
+  --fg-pri: #ff8400;
+  --fg-pri-a: #ff9523;
+  --fg-sec: #ac3806;
+  --fg-sec-a: #d84609;
+}
 
-  --sec-b: #e89ba8;
-  --sec: #e85d75;
-  --sec-d: #78303c;
+/* Light theme */
+@media (prefers-color-scheme: light) {
+  $theme: "light";
+  :root {
+    --txt: #130e01;
+    --txt-a: #926b08;
+    --bg-pri: #fffaeb;
+    --bg-pri-a: #fcefcf;
+    --bg-sec: #fae09e;
+    --bg-sec-a: #f9d886;
+    --bg-ter: #f7d06e;
+    --bg-ter-a: #f6c955;
+    --fg-pri: #ff8400;
+    --fg-pri-a: #cc6900;
+    --fg-sec: #cf4307;
+    --fg-sec-a: #ac3806;
+  }
+}
 
-  --ter-b: #f5f5f5;
-  --ter: #dbdbdb;
-  --ter-d: #999999;
-
-  --qua-b: #ab7da2;
-  --qua: #51344d;
-  --qua-d: #332530;
-
-  --qui-b: #706b6e;
-  --qui: #565254;
-  --qui-d: #3d3a3c;
-  // --sen: #bdd65c;
-  // --sep: #6184ff;
-
-  --txt-b: #fff;
-  --txt-d: #000;
-  --txt-mid: #7f7f7f;
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+  $theme: "dark";
+  :root {
+    --txt: #fef9ec;
+    --txt-a: #f8d26d;
+    --bg-pri: #140f00;
+    --bg-pri-a: #181201;
+    --bg-sec: #312303;
+    --bg-sec-a: #483505;
+    --bg-ter: #614705;
+    --bg-ter-a: #795906;
+    --fg-pri: #ff8400;
+    --fg-pri-a: #ff9523;
+    --fg-sec: #ac3806;
+    --fg-sec-a: #d84609;
+  }
 }
 
 /* box-sizing and font sizing */
@@ -119,9 +147,9 @@ body {
   width: 100vw;
   height: 100vh;
   margin: 0;
+  position: relative;
   overflow-x: hidden;
   overflow: hidden;
-  border: 1px solid #000;
 }
 
 /* scrollbar */
@@ -132,17 +160,17 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: var(--txt-mid);
+  background: var(--bg-sec);
   border-radius: 0.4rem;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--qua);
+  background: var(--fg-pri);
   border-radius: 0.3rem;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--qui);
+  background: var(--fg-pri-a);
 }

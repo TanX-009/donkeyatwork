@@ -5,7 +5,7 @@ var router = express.Router();
 
 // deploy page
 router.get("/", function(req, res, next) {
-  if (!Login.loginStatus) {
+  if (!Login.status) {
     res.redirect("/login");
   } else res.send("deploy");
 });

@@ -1,0 +1,18 @@
+@mixin input {
+  font-size: 0.5em;
+
+  outline: none;
+  border: 0.1rem solid black;
+  border-radius: 1rem;
+
+  background: var(--bg-ter);
+  color: var(--txt);
+}
+
+@mixin panel {
+  border-radius: 1rem;
+  background: var(--bg-sec);
+  box-shadow:
+    0 0.4rem 0 var(--bg-sec-a),
+    0 0.5rem 0 black;
+}

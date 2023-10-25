@@ -5,7 +5,8 @@ var router = express.Router();
 router.use("/api", require("./api"));
 
 /* Login page. */
-router.use("/login", require("./login"));
+router.use("/login", require("./account/login"));
+router.use("/register", require("./account/register"));
 router.use("/deploy", require("./deploy"));
 
 module.exports = router;

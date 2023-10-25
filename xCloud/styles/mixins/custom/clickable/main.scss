@@ -1,0 +1,32 @@
+@mixin button {
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  font-weight: 600;
+
+  outline: none;
+  border: 0.1rem solid black;
+  box-shadow:
+    0 0.3rem 0 var(--fg-pri-a),
+    0 0.4rem 0 black;
+
+  color: white;
+  background: var(--fg-pri);
+  -webkit-text-stroke-width: 0.05rem;
+  -webkit-text-stroke-color: black;
+
+  &:active {
+    transform: translateY(0.4rem);
+    box-shadow: 0 0 0 var(--fg-pri-a);
+  }
+}
+
+@mixin link {
+  font-weight: 600;
+  color: var(--fg-pri);
+  -webkit-text-stroke-width: 0.05rem;
+  -webkit-text-stroke-color: black;
+
+  &:hover {
+    color: var(--fg-sec);
+  }
+}

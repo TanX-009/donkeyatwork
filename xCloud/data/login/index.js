@@ -1,3 +1,4 @@
-let loginStatus = false;
+let status = false;
+let data = {};
 
-module.exports = { loginStatus };
+module.exports = { status, data };

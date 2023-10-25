@@ -1,0 +1,64 @@
+.accountContainer {
+  padding: 7rem;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+
+  @include theme;
+  @include fl("c", flex-start, "c", 2rem);
+
+  font-size: 4rem;
+
+  h1 {
+    font-size: inherit;
+    @include heading-pri;
+  }
+
+  p {
+    font-size: 2rem;
+  }
+}
+
+.account {
+  width: fit-content;
+  padding: 2rem;
+  border: 1px solid #000;
+
+  @include fl("c", "c", "c", 1rem);
+  @include panel;
+
+  button {
+    padding: 1rem 2rem;
+
+    @include button;
+    font-size: 2rem;
+  }
+}
+
+.field {
+  width: 100%;
+
+  @include fl("c", "c", flex-start, 0.1rem);
+
+  label {
+    font-weight: 500;
+    @include heading-sec;
+  }
+  input {
+    width: 100%;
+    padding: 1rem;
+
+    @include input;
+  }
+}
+
+.buttons {
+  @include fl("r", "c", "c", 1rem);
+
+  a {
+    font-size: 2.5rem;
+    text-decoration: none;
+    @include fl("r", "c", "c");
+    @include link;
+  }
+}

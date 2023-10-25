@@ -1,0 +1,15 @@
+@mixin heading-pri {
+  color: var(--fg-pri);
+  filter: drop-shadow(0 0.2rem 0 var(--fg-pri-a)) drop-shadow(0 0.1rem 0 black);
+
+  -webkit-text-stroke-width: 0.05rem;
+  -webkit-text-stroke-color: black;
+}
+
+@mixin heading-sec {
+  color: var(--fg-sec);
+  filter: drop-shadow(0 0.2rem 0 var(--fg-sec-a)) drop-shadow(0 0.1rem 0 black);
+
+  -webkit-text-stroke-width: 0.05rem;
+  -webkit-text-stroke-color: black;
+}
