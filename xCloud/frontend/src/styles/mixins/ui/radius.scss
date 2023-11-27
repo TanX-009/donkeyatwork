@@ -1,0 +1,15 @@
+@mixin radiusVariant($variant) {
+  @if ($variant == "top") {
+    border-radius: $radius $radius 0 0;
+  } @else if ($variant == "bottom") {
+    border-radius: 0 0 $radius $radius;
+  } @else if ($variant == "center") {
+    border-radius: 0 0 0 0;
+  } @else if ($variant == "right") {
+    border-radius: 0 $radius $radius 0;
+  } @else if ($variant == "left") {
+    border-radius: $radius 0 0 $radius;
+  } @else if ($variant == "single") {
+    border-radius: $radius $radius $radius $radius;
+  }
+}

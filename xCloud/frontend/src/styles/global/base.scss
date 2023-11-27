@@ -1,0 +1,39 @@
+/* Base reset */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* box-sizing and font sizing */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  font-family: "Ubuntu", sans-serif;
+
+  /* transition: all 0.3s ease-out; */
+  /* -webkit-transition: all 0.3s ease-out; */
+  /* -moz-transition: all 0.3s ease-out; */
+  /* -o-transition: all 0.3s ease-out; */
+}
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  overflow: hidden;
+
+  background: var(--bg-pri);
+  color: var(--txt);
+}
+
+main {
+  max-width: 1440px;
+  margin: 0 auto;
+}

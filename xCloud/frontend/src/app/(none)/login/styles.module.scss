@@ -1,0 +1,32 @@
+// variables
+@import "/src/styles/variables/@_main.scss";
+
+// mixins
+@import "/src/styles/mixins/@_main.scss";
+
+.login {
+  height: 100vh;
+  width: 100%;
+  max-width: 360px;
+  padding: $space-s;
+  font-size: $step-1;
+  margin: auto;
+
+  @include fl("c", "c", "c");
+
+  form {
+    width: 100%;
+    @include fl("c", null, null, 0);
+  }
+}
+
+.logo {
+  width: 100%;
+  max-width: 360px;
+  position: relative;
+  aspect-ratio: 415/162;
+
+  img {
+    object-fit: contain;
+  }
+}

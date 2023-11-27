@@ -1,0 +1,55 @@
+// mixins
+@import "/src/styles/mixins/@_main.scss";
+
+// variables
+@import "/src/styles/variables/@_main.scss";
+
+.passwordInput {
+  @include fl("c", null, null, 0);
+  height: calc($space-2xs + $space-2xs + $step-2);
+
+  label {
+    @include label;
+  }
+}
+
+.inputContainer {
+  position: relative;
+  @include fl("r");
+  height: 100%;
+
+  input.top {
+    @include radiusVariant("top");
+  }
+  input.bottom {
+    @include radiusVariant("bottom");
+  }
+  input.center {
+    @include radiusVariant("center");
+  }
+  input.left {
+    @include radiusVariant("left");
+  }
+  input.right {
+    @include radiusVariant("right");
+  }
+  input.single {
+    @include radiusVariant("single");
+  }
+  input.top,
+  input.bottom,
+  input.center,
+  input.left,
+  input.right,
+  input.single {
+    @include input;
+    position: absolute;
+    width: 100%;
+  }
+
+  svg {
+    position: absolute;
+    right: $space-xs;
+    transform: translateY(50%);
+  }
+}

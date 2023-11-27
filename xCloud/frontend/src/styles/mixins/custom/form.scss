@@ -1,0 +1,27 @@
+@mixin input {
+  font-size: inherit;
+  padding: $space-2xs;
+  border: none;
+  outline: none;
+
+  border: $border var(--bg-ter);
+  background: var(--bg-sec);
+  color: var(--txt);
+}
+
+@mixin label {
+  font-size: inherit;
+}
+
+@mixin submit {
+  font-size: inherit;
+  padding: $space-2xs;
+
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  border: $border var(--bg-ter);
+  background: var(--bg-ter-a);
+  color: var(--txt);
+}

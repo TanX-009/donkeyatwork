@@ -1,7 +1,7 @@
 @mixin button {
   padding: 1rem 2rem;
   border-radius: 1rem;
-  font-weight: 600;
+  font-weight: 500;
 
   outline: none;
   border: 0.1rem solid black;
@@ -21,7 +21,7 @@
 }
 
 @mixin link {
-  font-weight: 600;
+  font-weight: 500;
   color: var(--fg-pri);
   -webkit-text-stroke-width: 0.05rem;
   -webkit-text-stroke-color: black;
