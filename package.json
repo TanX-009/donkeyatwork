@@ -21,5 +21,8 @@
   "homepage": "https://github.com/TanX-009/donkeyatwork#readme",
   "devDependencies": {
     "eslint": "^8.44.0"
+  },
+  "dependencies": {
+    "create-next-app": "^14.0.3"
   }
 }
