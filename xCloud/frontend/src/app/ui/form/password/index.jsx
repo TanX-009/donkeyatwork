@@ -5,36 +5,29 @@ import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 export default function PasswordInput({
   name,
+  label,
   placeholder,
   variant,
   onChange,
+  required,
 }) {
   const [isVisible, setIsVisible] = useState(false);
   return (
     <div className={styles.passwordInput}>
-      <label htmlFor={name}>{name}</label>
+      <label htmlFor={name}>{label}</label>
       <div className={styles.inputContainer}>
+        <input
+          type={isVisible ? "text" : "password"}
+          placeholder={placeholder || ""}
+          className={styles[variant]}
+          name={name}
+          onChange={onChange}
+          required={required ? true : false}
+        />
         {isVisible ? (
-          <input
-            type="password"
-            placeholder={placeholder || ""}
-            className={styles[variant]}
-            name={name}
-            onChange={onChange}
-          />
+          <FaEyeSlash onClick={() => setIsVisible(false)} />
         ) : (
-          <input
-            type="text"
-            placeholder={placeholder || ""}
-            className={styles[variant]}
-            name={name}
-            onChange={onChange}
-          />
-        )}
-        {isVisible ? (
-          <FaEye onClick={() => setIsVisible(false)} />
-        ) : (
-          <FaEyeSlash
+          <FaEye
             onClick={() => {
               setIsVisible(true);
             }}
@@ -47,7 +40,9 @@ export default function PasswordInput({
 
 PasswordInput.propTypes = {
   name: PropTypes.string,
+  label: PropTypes.string,
   placeholder: PropTypes.string,
   variant: PropTypes.string,
   onChange: PropTypes.func,
+  required: PropTypes.bool,
 };

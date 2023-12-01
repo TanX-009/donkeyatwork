@@ -8,31 +8,5 @@
   width: 100%;
   @include fl("c", null, null, 0);
 
-  input.top {
-    @include radiusVariant("top");
-  }
-  input.bottom {
-    @include radiusVariant("bottom");
-  }
-  input.center {
-    @include radiusVariant("center");
-  }
-  input.left {
-    @include radiusVariant("left");
-  }
-  input.right {
-    @include radiusVariant("right");
-  }
-  input.single {
-    @include radiusVariant("single");
-  }
-  input.top,
-  input.bottom,
-  input.center,
-  input.left,
-  input.right,
-  input.single {
-    @include submit;
-    font-weight: 700;
-  }
+  @include submit;
 }

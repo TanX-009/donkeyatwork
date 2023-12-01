@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get("/", function(req, res, next) {
-  res.render("account/forgot_password", { message: "" });
+  res.status(200).json({ message: "" });
 });
 
 router.post("/", controllers.account.login);

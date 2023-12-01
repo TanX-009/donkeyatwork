@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const { Ctrls } = require("../../controllers");
+const { controllers } = require("../../controllers");
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, "uploads/");
@@ -14,9 +14,11 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-// manage page
-router.get("/", Ctrls.manage.renderManage);
 
-router.post("/addProject", upload.single("project"), Ctrls.manage.addProject);
+router.post(
+  "/addProject",
+  upload.single("project"),
+  controllers.manage.addProject,
+);
 
 module.exports = router;

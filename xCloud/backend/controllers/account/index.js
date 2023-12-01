@@ -1,36 +1,63 @@
-const { Login } = require("../../data");
-const db = require("../../db");
 const bcrypt = require("bcrypt");
+const { query } = require("../../db");
+const { getToken } = require("../../common/Auth");
 const saltRounds = 10;
 
 module.exports.login = async (req, res) => {
   try {
-    const checkUser = await db.query(
+    // query user by username
+    const checkUser = await query(
       `SELECT * FROM account WHERE username = '${req.body.username}';`,
     );
-    console.log(checkUser);
+    // return if user doesn't exist
     if (checkUser.rowCount === 0) {
-      return res.render("account/login", {
-        message: "User doesn't exist!",
+      return res.status(201).json({
+        msg: "User doesn't exist!",
       });
     }
 
-    bcrypt
+    // check if the password is correct
+    await bcrypt
       .compare(req.body.password, checkUser.rows[0].password)
-      .then((isEqual) => {
+      .then(async (isEqual) => {
         if (isEqual) {
-          Login.status = true;
-          Login.data = {
+          // generate access token
+          const accessToken = await getToken({
             _id: checkUser.rows[0]._id,
-            username: checkUser.rows[0].username,
-          };
-          return res.redirect("/manage");
+          });
+
+          // update jwt token
+          await query(
+            `UPDATE account SET token = '${accessToken}' WHERE username = '${req.body.username}';`,
+          );
+
+          // create data that is to sent to frontend
+          const rawdata = await query(
+            `SELECT * FROM account WHERE username = '${req.body.username}';`,
+          );
+          // delete critical data
+          const data = rawdata.rows[0];
+          delete data.password;
+          delete data.secretquestion;
+          delete data.secretanswer;
+
+          // return sucessfull response with user data
+          return res
+            .status(200)
+            .json({ user: data, msg: "Login sucessfull", status: "SUCESS" });
         } else
-          return res.render("account/login", {
-            message: "Password doesn't match!",
+          return res.status(201).json({
+            msg: "Password doesn't match!",
+            status: "FAILED",
           });
       })
-      .catch((err) => console.error(err.message));
+      .catch((err) => {
+        console.error(err.message);
+        res.status(400).json({
+          msg: "Login failed",
+          status: "FAILED",
+        });
+      });
   } catch (error) {
     return res.status(400).json({
       error: "Error while logging in",
@@ -40,12 +67,13 @@ module.exports.login = async (req, res) => {
 
 module.exports.register = async (req, res) => {
   try {
-    const result = await db.query(
+    const result = await query(
       `SELECT username FROM account WHERE username = '${req.body.username}';`,
     );
     if (result.rowCount !== 0) {
-      return res.render("account/register", {
-        message: "User already exists!",
+      return res.status(200).json({
+        msg: "User already exists!",
+        status: "FAILED",
       });
     }
 
@@ -71,14 +99,17 @@ module.exports.register = async (req, res) => {
       })
       .catch((err) => console.error(err.message));
 
-    await db.query(
-      `INSERT INTO account(username, password, secretQuestion, secretAnswer) VALUES ('${req.body.username}', '${passHash}', '${req.body.secretQuestion}', '${secretAnsHash}');`,
+    await query(
+      `INSERT INTO account(username, password, secretQuestion, secretAnswer, token) VALUES ('${req.body.username}', '${passHash}', '${req.body.secretQuestion}', '${secretAnsHash}', '');`,
     );
 
-    return res.status(200).redirect("/login");
+    return res
+      .status(200)
+      .json({ msg: "Registered Sucessfully", status: "SUCESS" });
   } catch (error) {
     return res.status(400).json({
       error: "Error while registring",
+      status: "FAILED",
     });
   }
 };

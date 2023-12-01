@@ -4,8 +4,10 @@ var router = express.Router();
 // api route
 router.use("/api", require("./api"));
 
-/* Login page. */
+// Login
 router.use("/login", require("./account/login"));
+
+// Register
 router.use("/register", require("./account/register"));
 
 // management page

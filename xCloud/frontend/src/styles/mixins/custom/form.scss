@@ -1,12 +1,39 @@
 @mixin input {
-  font-size: inherit;
-  padding: $space-2xs;
-  border: none;
-  outline: none;
+  // set radius variants
+  input.top {
+    @include radiusVariant("top");
+  }
+  input.bottom {
+    @include radiusVariant("bottom");
+  }
+  input.center {
+    @include radiusVariant("center");
+  }
+  input.left {
+    @include radiusVariant("left");
+  }
+  input.right {
+    @include radiusVariant("right");
+  }
+  input.single {
+    @include radiusVariant("single");
+  }
+  // set styling to the input
+  input.top,
+  input.bottom,
+  input.center,
+  input.left,
+  input.right,
+  input.single {
+    font-size: inherit;
+    padding: $space-2xs;
+    border: none;
+    outline: none;
 
-  border: $border var(--bg-ter);
-  background: var(--bg-sec);
-  color: var(--txt);
+    border: $border var(--bg-ter);
+    background: var(--bg-sec);
+    color: var(--txt);
+  }
 }
 
 @mixin label {
@@ -14,14 +41,40 @@
 }
 
 @mixin submit {
-  font-size: inherit;
-  padding: $space-2xs;
+  input.top {
+    @include radiusVariant("top");
+  }
+  input.bottom {
+    @include radiusVariant("bottom");
+  }
+  input.center {
+    @include radiusVariant("center");
+  }
+  input.left {
+    @include radiusVariant("left");
+  }
+  input.right {
+    @include radiusVariant("right");
+  }
+  input.single {
+    @include radiusVariant("single");
+  }
+  input.top,
+  input.bottom,
+  input.center,
+  input.left,
+  input.right,
+  input.single {
+    font-size: inherit;
+    font-weight: 700;
+    padding: $space-2xs;
 
-  border: none;
-  outline: none;
-  cursor: pointer;
+    border: none;
+    outline: none;
+    cursor: pointer;
 
-  border: $border var(--bg-ter);
-  background: var(--bg-ter-a);
-  color: var(--txt);
+    border: $border var(--bg-ter);
+    background: var(--fg-pri);
+    color: var(--txt);
+  }
 }

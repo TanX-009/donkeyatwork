@@ -1,30 +1,15 @@
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-
-const livereload = require("livereload");
-const connectLiveReload = require("connect-livereload");
+require("dotenv").config();
 
 let indexRouter = require("./routes/index");
 const session = require("express-session");
 
-const liveReloadServer = livereload.createServer();
-liveReloadServer.server.once("connection", () => {
-  setTimeout(() => {
-    liveReloadServer.refresh("/");
-  }, 100);
-});
-
 let app = express();
-
-// livereload
-app.use(connectLiveReload());
-
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "pug");
 
 // use sessions
 app.use(
@@ -35,6 +20,7 @@ app.use(
   }),
 );
 
+app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -54,9 +40,7 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
+  res.status(err.status || 500).json({ error: err });
 });
 
 module.exports = app;
