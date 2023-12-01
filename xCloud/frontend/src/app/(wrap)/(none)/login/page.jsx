@@ -11,6 +11,29 @@ import { updateOnChange } from "@/src/app/lib/form/updateOnChange";
 import { formPost } from "@/src/app/lib/form/post";
 import LinkButton from "@/src/app/ui/clickables/linkButton";
 
+function loginHandler({ e, setFailedRes, registerForm, setContext, context }) {
+  e.preventDefault();
+  setFailedRes("Logging in...");
+  formPost(
+    // link
+    "/register",
+    // data
+    registerForm,
+    // onSucess
+    (data) => {
+      setContext({ ...context, user: data.user });
+    },
+    // onElse
+    (data) => {
+      setFailedRes(data.msg);
+    },
+    // onError
+    (error) => {
+      setFailedRes(error.message);
+    },
+  );
+}
+
 export default function Login() {
   const { context, setContext } = useContext(Context);
 
@@ -26,9 +49,9 @@ export default function Login() {
             alt="xCloud"
             fill={true}
             priority={true}
-            sizes="(max-width: 1920em) 16.6667vw, (max-width: 1440em) 22.2222vw, (max-width: 128
-0em) 25.0000vw, (max-width: 980em) 32.6531vw, (max-width: 720em) 44.4444vw, (max-wid
-th: 640em) 50.0000vw, (max-width: 360em) 88.8889vw, 30.5177vw"
+            sizes="(max-width: 1920px) 16.6667vw, (max-width: 1440px) 22.2222vw, (max-width: 128
+0px) 25.0000vw, (max-width: 980px) 32.6531vw, (max-width: 720px) 44.4444vw, (max-wid
+th: 640px) 50.0000vw, (max-width: 360px) 88.8889vw, 30.5177vw"
           />
         ) : (
           <Image
@@ -36,35 +59,22 @@ th: 640em) 50.0000vw, (max-width: 360em) 88.8889vw, 30.5177vw"
             alt="xCloud"
             fill={true}
             priority={true}
-            sizes="(max-width: 1920em) 16.6667vw, (max-width: 1440em) 22.2222vw, (max-width: 128
-0em) 25.0000vw, (max-width: 980em) 32.6531vw, (max-width: 720em) 44.4444vw, (max-wid
-th: 640em) 50.0000vw, (max-width: 360em) 88.8889vw, 30.5177vw"
+            sizes="(max-width: 1920px) 16.6667vw, (max-width: 1440px) 22.2222vw, (max-width: 128
+0px) 25.0000vw, (max-width: 980px) 32.6531vw, (max-width: 720px) 44.4444vw, (max-wid
+th: 640px) 50.0000vw, (max-width: 360px) 88.8889vw, 30.5177vw"
           />
         )}
       </div>
-      <p>{failedRes}</p>
+      <p className={styles.failedRes}>{failedRes}</p>
       <form
         onSubmit={(e) => {
-          e.preventDefault();
-          setFailedRes("Logging in...");
-          formPost(
-            // link
-            "/login",
-            // data
+          loginHandler({
+            e,
+            setFailedRes,
             loginForm,
-            // onSucess
-            (data) => {
-              setContext({ ...context, user: data.user });
-            },
-            // onElse
-            (data) => {
-              setFailedRes(data.msg);
-            },
-            // onError
-            (error) => {
-              setFailedRes(error.message);
-            },
-          );
+            setContext,
+            context,
+          });
         }}
       >
         <TextInput
@@ -85,7 +95,14 @@ th: 640em) 50.0000vw, (max-width: 360em) 88.8889vw, 30.5177vw"
         />
         <SubmitInput value="Login" variant="bottom" />
       </form>
-      <LinkButton path="/register">Register</LinkButton>
+      <div className={styles.links}>
+        <LinkButton path="/register" name="Register" variant="top"></LinkButton>
+        <LinkButton
+          path="/forgot_password"
+          name="Forgot Password"
+          variant="bottom"
+        ></LinkButton>
+      </div>
     </div>
   );
 }

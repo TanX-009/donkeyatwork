@@ -12,5 +12,7 @@
     @include label;
   }
 
-  @include input;
+  input {
+    @include input;
+  }
 }

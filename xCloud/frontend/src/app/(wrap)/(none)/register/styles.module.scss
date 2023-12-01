@@ -1,0 +1,45 @@
+// variables
+@import "/src/styles/variables/@_main.scss";
+
+// mixins
+@import "/src/styles/mixins/@_main.scss";
+
+.register {
+  width: 100%;
+  max-width: 360px;
+  padding: $space-s;
+  font-size: $step-1;
+  margin: $space-l auto;
+
+  @include fl("c", flex-start, "c");
+
+  form {
+    width: 100%;
+    @include fl("c", null, null, 0);
+  }
+}
+
+.logo {
+  width: 100%;
+  max-width: 360px;
+  position: relative;
+  aspect-ratio: 415/162;
+
+  img {
+    object-fit: contain;
+  }
+}
+
+.failedRes {
+  margin-bottom: $space-2xs;
+  color: var(--fg-sec);
+}
+
+.links {
+  width: 100%;
+  margin-top: $space-l;
+
+  font-size: $step-0;
+
+  @include fl("c");
+}

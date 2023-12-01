@@ -46,7 +46,7 @@ async function formSecurePost(
     await axios
       .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}${link}`, formData)
       .then((res) => {
-        console.log(res.data.msg);
+        // console.log(res.data.msg);
         if (res.data.status === "SUCESS") {
           onSucess(res.data);
         } else {

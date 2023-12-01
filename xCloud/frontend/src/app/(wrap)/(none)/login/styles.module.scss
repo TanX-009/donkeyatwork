@@ -13,12 +13,6 @@
 
   @include fl("c", flex-start, "c");
 
-  // failed response
-  p {
-    margin-bottom: $space-2xs;
-    color: var(--fg-sec);
-  }
-
   form {
     width: 100%;
     @include fl("c", null, null, 0);
@@ -34,4 +28,18 @@
   img {
     object-fit: contain;
   }
+}
+
+.failedRes {
+  margin-bottom: $space-2xs;
+  color: var(--fg-sec);
+}
+
+.links {
+  width: 100%;
+  margin-top: $space-l;
+
+  font-size: $step-0;
+
+  @include fl("c");
 }

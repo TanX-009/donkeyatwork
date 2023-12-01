@@ -18,13 +18,9 @@
   @include fl("r");
   height: 100%;
 
-  @include input;
-  input.top,
-  input.bottom,
-  input.center,
-  input.left,
-  input.right,
-  input.single {
+  input {
+    @include input;
+
     position: absolute;
     padding-right: calc($step-2 + $space-xs);
     width: 100%;

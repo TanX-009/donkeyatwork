@@ -8,5 +8,7 @@
   width: 100%;
   @include fl("c", null, null, 0);
 
-  @include submit;
+  input {
+    @include submit;
+  }
 }

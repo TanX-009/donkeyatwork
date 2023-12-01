@@ -1,19 +1,19 @@
 /* scrollbar */
 /* width */
 ::-webkit-scrollbar {
-  width: 1rem;
+  width: $space-2xs;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
   background: var(--bg-sec);
-  border-radius: 0.4rem;
+  border-radius: $radius;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: var(--fg-pri);
-  border-radius: 0.3rem;
+  border-radius: $radius;
 }
 
 /* Handle on hover */

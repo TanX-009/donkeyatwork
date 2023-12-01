@@ -13,3 +13,24 @@
     border-radius: $radius $radius $radius $radius;
   }
 }
+
+@mixin radiusVariants {
+  &.top {
+    @include radiusVariant("top");
+  }
+  &.bottom {
+    @include radiusVariant("bottom");
+  }
+  &.center {
+    @include radiusVariant("center");
+  }
+  &.left {
+    @include radiusVariant("left");
+  }
+  &.right {
+    @include radiusVariant("right");
+  }
+  &.single {
+    @include radiusVariant("single");
+  }
+}
