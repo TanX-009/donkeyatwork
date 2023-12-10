@@ -11,6 +11,7 @@ import { updateOnChange } from "@/src/app/lib/form/updateOnChange";
 import { formPost } from "@/src/app/lib/form/post";
 import LinkButton from "@/src/app/ui/clickables/linkButton";
 import { useRouter } from "next/navigation";
+import FailedRes from "@/src/app/ui/form/failedRes";
 
 function registerHandler({
   e,
@@ -83,7 +84,7 @@ th: 640px) 50.0000vw, (max-width: 360px) 88.8889vw, 30.5177vw"
           />
         )}
       </div>
-      <p className={styles.failedRes}>{failedRes}</p>
+      <FailedRes>{failedRes}</FailedRes>
       <form
         onSubmit={(e) => {
           registerHandler({

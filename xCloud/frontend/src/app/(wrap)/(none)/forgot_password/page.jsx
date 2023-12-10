@@ -10,48 +10,56 @@ import { Context } from "../../layout";
 import { updateOnChange } from "@/src/app/lib/form/updateOnChange";
 import { formPost } from "@/src/app/lib/form/post";
 import LinkButton from "@/src/app/ui/clickables/linkButton";
-import FailedRes from "@/src/app/ui/form/failedRes";
 import { useRouter } from "next/navigation";
+import CharSpacer from "@/src/app/ui/misc/charSpacer";
+import FailedRes from "@/src/app/ui/form/failedRes";
 
-function loginHandler({
+function forgotPassHandler({
   e,
   setFailedRes,
-  loginForm,
+  forgotPassForm,
   setContext,
   context,
   router,
 }) {
   e.preventDefault();
-  setFailedRes("Logging in...");
-  formPost(
-    // link
-    "/login",
-    // data
-    loginForm,
-    // onSucess
-    (data) => {
-      setContext({ ...context, user: data.user }, router.push("/"));
-    },
-    // onElse
-    (data) => {
-      setFailedRes(data.msg);
-    },
-    // onError
-    (error) => {
-      setFailedRes(error.message);
-    },
-  );
+
+  // form validation
+  if (forgotPassForm.password !== forgotPassForm.confirm_password) {
+    setFailedRes("Password don't match!");
+  } else {
+    setFailedRes("Changing password...");
+    formPost(
+      // link
+      "/forgot_password",
+      // data
+      forgotPassForm,
+      // onSucess
+      (data) => {
+        setContext({ ...context, user: data.user });
+        router.push("/login");
+      },
+      // onElse
+      (data) => {
+        setFailedRes(data.msg);
+      },
+      // onError
+      (error) => {
+        setFailedRes(error.message);
+      },
+    );
+  }
 }
 
-export default function Login() {
+export default function Register() {
   const router = useRouter();
   const { context, setContext } = useContext(Context);
 
-  const [loginForm, setLoginForm] = useState({});
+  const [forgotPassForm, setForgotPassForm] = useState({});
   const [failedRes, setFailedRes] = useState("‎");
 
   return (
-    <div className={styles.login}>
+    <div className={styles.register}>
       <div className={styles.logo}>
         {context.isDarkMode ? (
           <Image
@@ -78,10 +86,10 @@ th: 640px) 50.0000vw, (max-width: 360px) 88.8889vw, 30.5177vw"
       <FailedRes>{failedRes}</FailedRes>
       <form
         onSubmit={(e) => {
-          loginHandler({
+          forgotPassHandler({
             e,
             setFailedRes,
-            loginForm,
+            forgotPassForm,
             setContext,
             context,
             router,
@@ -92,27 +100,41 @@ th: 640px) 50.0000vw, (max-width: 360px) 88.8889vw, 30.5177vw"
           name="username"
           label=""
           placeholder="Username"
-          variant="top"
-          onChange={(e) => updateOnChange(e, loginForm, setLoginForm)}
+          variant="single"
+          onChange={(e) => updateOnChange(e, forgotPassForm, setForgotPassForm)}
           required={true}
         />
+        <CharSpacer />
+        <p>Secret Question</p>
+        <PasswordInput
+          name="secretanswer"
+          label=""
+          placeholder="Secret answer"
+          variant="single"
+          onChange={(e) => updateOnChange(e, forgotPassForm, setForgotPassForm)}
+          required={true}
+        />
+        <CharSpacer />
         <PasswordInput
           name="password"
           label=""
-          placeholder="Password"
-          variant="center"
-          onChange={(e) => updateOnChange(e, loginForm, setLoginForm)}
+          placeholder="New password"
+          variant="top"
+          onChange={(e) => updateOnChange(e, forgotPassForm, setForgotPassForm)}
           required={true}
         />
-        <SubmitInput value="Login" variant="bottom" />
+        <PasswordInput
+          name="confirm_password"
+          label=""
+          placeholder="Confirm new password"
+          variant="center"
+          onChange={(e) => updateOnChange(e, forgotPassForm, setForgotPassForm)}
+          required={true}
+        />
+        <SubmitInput value="Change password" variant="bottom" />
       </form>
       <div className={styles.links}>
-        <LinkButton path="/register" name="Register" variant="top"></LinkButton>
-        <LinkButton
-          path="/forgot_password"
-          name="Forgot Password"
-          variant="bottom"
-        ></LinkButton>
+        <LinkButton path="/login" name="Login" variant="single"></LinkButton>
       </div>
     </div>
   );

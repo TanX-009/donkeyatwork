@@ -10,6 +10,9 @@ router.use("/login", require("./account/login"));
 // Register
 router.use("/register", require("./account/register"));
 
+// Forgot password
+router.use("/forgot_password", require("./account/forgot_password"));
+
 // management page
 router.use("/", require("./manage"));
 

@@ -24,12 +24,10 @@ html {
 
 body {
   width: 100vw;
-  height: 100vh;
   position: absolute;
   top: 0;
   left: 0;
   overflow-x: hidden;
-  overflow-y: auto;
 
   background: var(--bg-pri);
   color: var(--txt);

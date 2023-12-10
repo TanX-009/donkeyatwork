@@ -105,7 +105,67 @@ module.exports.register = async (req, res) => {
 
     return res
       .status(200)
-      .json({ msg: "Registered Sucessfully", status: "SUCESS" });
+      .json({ msg: "Registered sucessfully", status: "SUCESS" });
+  } catch (error) {
+    return res.status(400).json({
+      error: "Error while registring",
+      status: "FAILED",
+    });
+  }
+};
+
+module.exports.forgot_password = async (req, res) => {
+  try {
+    // query user by username
+    const checkUser = await query(
+      `SELECT * FROM account WHERE username = '${req.body.username}';`,
+    );
+    // return if user doesn't exist
+    if (checkUser.rowCount === 0) {
+      return res.status(201).json({
+        msg: "User doesn't exist!",
+      });
+    }
+
+    // check if the secretanswer is correct
+    await bcrypt
+      .compare(req.body.secretanswer, checkUser.rows[0].secretanswer)
+      .then(async (isEqual) => {
+        if (isEqual) {
+          // set new password
+          let passHash = "";
+
+          await bcrypt
+            .genSalt(saltRounds)
+            .then((salt) => {
+              return bcrypt.hash(req.body.password, salt);
+            })
+            .then((hash) => {
+              passHash = hash;
+            })
+            .catch((err) => console.error(err.message));
+
+          await query(
+            `UPDATE account SET password = '${passHash}' WHERE username = '${req.body.username}';`,
+          );
+
+          // return sucessfull response with user data
+          return res
+            .status(200)
+            .json({ msg: "Password changed sucessfully", status: "SUCESS" });
+        } else
+          return res.status(201).json({
+            msg: "Secret answer doesn't match!",
+            status: "FAILED",
+          });
+      })
+      .catch((err) => {
+        console.error(err.message);
+        res.status(400).json({
+          msg: "Password changing failed",
+          status: "FAILED",
+        });
+      });
   } catch (error) {
     return res.status(400).json({
       error: "Error while registring",

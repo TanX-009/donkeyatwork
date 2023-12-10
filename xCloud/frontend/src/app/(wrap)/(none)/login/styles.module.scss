@@ -30,16 +30,12 @@
   }
 }
 
-.failedRes {
-  margin-bottom: $space-2xs;
-  color: var(--fg-sec);
-}
-
 .links {
   width: 100%;
   margin-top: $space-l;
 
   font-size: $step-0;
+  font-weight: 700;
 
   @include fl("c");
 }

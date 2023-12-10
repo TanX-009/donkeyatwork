@@ -17,7 +17,7 @@ const upload = multer({ storage: storage });
 
 router.post(
   "/addProject",
-  upload.single("project"),
+  upload.single("file"),
   controllers.manage.addProject,
 );
 

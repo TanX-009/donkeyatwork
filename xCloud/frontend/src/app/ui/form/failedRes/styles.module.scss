@@ -1,0 +1,8 @@
+// variables
+@import "/src/styles/variables/@_main.scss";
+
+.failedResponse {
+  margin-bottom: $space-2xs;
+  color: var(--fg-sec);
+  text-align: center;
+}
