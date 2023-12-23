@@ -15,11 +15,11 @@ export default function PasswordInput({
   return (
     <div className={styles.passwordInput}>
       <label htmlFor={name}>{label}</label>
-      <div className={styles.inputContainer}>
+      <div className={styles.inputContainer + " " + styles[variant]}>
         <input
           type={isVisible ? "text" : "password"}
+          id={name}
           placeholder={placeholder || ""}
-          className={styles[variant]}
           name={name}
           onChange={onChange}
           required={required ? true : false}

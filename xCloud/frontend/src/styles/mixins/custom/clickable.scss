@@ -1,7 +1,6 @@
 @mixin linkButton {
   @include radiusVariants;
 
-  width: 100%;
   padding: $space-2xs;
 
   font-size: inherit;
@@ -9,7 +8,24 @@
   text-decoration: none;
   text-align: center;
 
+  cursor: pointer;
   color: var(--txt);
   background: var(--fg-pri);
+  border: $border var(--bg-ter);
+}
+
+@mixin linkButton2 {
+  @include radiusVariants;
+
+  padding: $space-2xs;
+
+  font-size: inherit;
+  font-weight: inherit;
+  text-decoration: none;
+  text-align: center;
+
+  cursor: pointer;
+  color: var(--txt);
+  background: var(--bg-sec-a);
   border: $border var(--bg-ter);
 }

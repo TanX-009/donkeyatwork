@@ -1,0 +1,28 @@
+// variables
+@import "/src/styles/variables/@_main.scss";
+
+// mixins
+@import "/src/styles/mixins/@_main.scss";
+
+.prompt {
+  width: 100%;
+  @include fl("r", space-between, "c", $space-2xs);
+  padding: $space-2xs $space-s;
+  border-radius: $radius;
+  background: var(--bg-sec);
+}
+
+.confirmationBtns {
+  @include fl("r", "c", "c", $space-2xs);
+
+  .yes,
+  .no {
+    @include linkButton2;
+    @include fl("r", "c", "c");
+    border-radius: $radius;
+  }
+
+  .yes {
+    color: var(--red);
+  }
+}

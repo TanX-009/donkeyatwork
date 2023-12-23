@@ -1,0 +1,14 @@
+// variables
+@import "/src/styles/variables/@_main.scss";
+
+// mixins
+@import "/src/styles/mixins/@_main.scss";
+
+.failedRes {
+  width: 100%;
+  padding: $space-2xs $space-s;
+  border-radius: $radius;
+  background: var(--bg-sec);
+  color: var(--red);
+  @include fl("r", space-between, "c", $space-2xs-xs);
+}

@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import TextInput from "../../../ui/form/text";
 import PasswordInput from "../../../ui/form/password";
-import Image from "next/image";
 import SubmitInput from "../../../ui/form/submit";
 import { Context } from "../../layout";
 import { updateOnChange } from "@/src/app/lib/form/updateOnChange";
@@ -12,6 +11,9 @@ import { formPost } from "@/src/app/lib/form/post";
 import LinkButton from "@/src/app/ui/clickables/linkButton";
 import FailedRes from "@/src/app/ui/form/failedRes";
 import { useRouter } from "next/navigation";
+import DisplayLogo from "@/src/app/ui/info/displayLogo";
+import Redirecting from "@/src/app/ui/misc/redirecting";
+import CharSpacer from "@/src/app/ui/misc/charSpacer";
 
 function loginHandler({
   e,
@@ -30,7 +32,7 @@ function loginHandler({
     loginForm,
     // onSucess
     (data) => {
-      setContext({ ...context, user: data.user }, router.push("/"));
+      setContext({ ...context, user: data.user }, () => router.push("/"));
     },
     // onElse
     (data) => {
@@ -50,32 +52,18 @@ export default function Login() {
   const [loginForm, setLoginForm] = useState({});
   const [failedRes, setFailedRes] = useState("‎");
 
+  // redirect user if is already loggedin
+  useEffect(() => {
+    if (context.user.username) {
+      router.push("/");
+    }
+  }, [context.user.username]);
+  if (context.user.username) {
+    return <Redirecting />;
+  }
+
   return (
     <div className={styles.login}>
-      <div className={styles.logo}>
-        {context.isDarkMode ? (
-          <Image
-            src={"xCloud-dark.svg"}
-            alt="xCloud"
-            fill={true}
-            priority={true}
-            sizes="(max-width: 1920px) 16.6667vw, (max-width: 1440px) 22.2222vw, (max-width: 128
-0px) 25.0000vw, (max-width: 980px) 32.6531vw, (max-width: 720px) 44.4444vw, (max-wid
-th: 640px) 50.0000vw, (max-width: 360px) 88.8889vw, 30.5177vw"
-          />
-        ) : (
-          <Image
-            src={"xCloud-light.svg"}
-            alt="xCloud"
-            fill={true}
-            priority={true}
-            sizes="(max-width: 1920px) 16.6667vw, (max-width: 1440px) 22.2222vw, (max-width: 128
-0px) 25.0000vw, (max-width: 980px) 32.6531vw, (max-width: 720px) 44.4444vw, (max-wid
-th: 640px) 50.0000vw, (max-width: 360px) 88.8889vw, 30.5177vw"
-          />
-        )}
-      </div>
-      <FailedRes>{failedRes}</FailedRes>
       <form
         onSubmit={(e) => {
           loginHandler({
@@ -88,6 +76,16 @@ th: 640px) 50.0000vw, (max-width: 360px) 88.8889vw, 30.5177vw"
           });
         }}
       >
+        {/* xCloud logo */}
+        <DisplayLogo />
+
+        {/* failed response */}
+        <FailedRes>{failedRes}</FailedRes>
+
+        {/* spacer */}
+        <CharSpacer half />
+
+        {/* username input */}
         <TextInput
           name="username"
           label=""
@@ -96,6 +94,8 @@ th: 640px) 50.0000vw, (max-width: 360px) 88.8889vw, 30.5177vw"
           onChange={(e) => updateOnChange(e, loginForm, setLoginForm)}
           required={true}
         />
+
+        {/* password input */}
         <PasswordInput
           name="password"
           label=""
@@ -104,16 +104,27 @@ th: 640px) 50.0000vw, (max-width: 360px) 88.8889vw, 30.5177vw"
           onChange={(e) => updateOnChange(e, loginForm, setLoginForm)}
           required={true}
         />
+
+        {/* submit login form */}
         <SubmitInput value="Login" variant="bottom" />
+
+        {/* other pages link */}
+        <div className={styles.links}>
+          {/* to register */}
+          <LinkButton
+            path="/register"
+            name="Register"
+            variant="top"
+          ></LinkButton>
+
+          {/* to forgot password */}
+          <LinkButton
+            path="/forgot_password"
+            name="Forgot Password"
+            variant="bottom"
+          ></LinkButton>
+        </div>
       </form>
-      <div className={styles.links}>
-        <LinkButton path="/register" name="Register" variant="top"></LinkButton>
-        <LinkButton
-          path="/forgot_password"
-          name="Forgot Password"
-          variant="bottom"
-        ></LinkButton>
-      </div>
     </div>
   );
 }

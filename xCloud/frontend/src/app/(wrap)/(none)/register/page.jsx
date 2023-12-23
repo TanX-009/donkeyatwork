@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import TextInput from "../../../ui/form/text";
 import PasswordInput from "../../../ui/form/password";
@@ -12,6 +12,8 @@ import { formPost } from "@/src/app/lib/form/post";
 import LinkButton from "@/src/app/ui/clickables/linkButton";
 import { useRouter } from "next/navigation";
 import FailedRes from "@/src/app/ui/form/failedRes";
+import Redirecting from "@/src/app/ui/misc/redirecting";
+import CharSpacer from "@/src/app/ui/misc/charSpacer";
 
 function registerHandler({
   e,
@@ -59,6 +61,16 @@ export default function Register() {
   const [registerForm, setRegisterForm] = useState({});
   const [failedRes, setFailedRes] = useState("‎");
 
+  // redirect user if is already loggedin
+  useEffect(() => {
+    if (context.user.username) {
+      router.push("/");
+    }
+  }, [context.user.username]);
+  if (context.user.username) {
+    return <Redirecting />;
+  }
+
   return (
     <div className={styles.register}>
       <div className={styles.logo}>
@@ -85,6 +97,8 @@ th: 640px) 50.0000vw, (max-width: 360px) 88.8889vw, 30.5177vw"
         )}
       </div>
       <FailedRes>{failedRes}</FailedRes>
+      {/* spacer */}
+      <CharSpacer half />
       <form
         onSubmit={(e) => {
           registerHandler({

@@ -2,6 +2,7 @@
   // set radius variants
   @include radiusVariants;
 
+  overflow: hidden;
   padding: $space-2xs;
 
   font-size: inherit;

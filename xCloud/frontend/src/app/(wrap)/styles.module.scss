@@ -1,0 +1,86 @@
+// variables
+@import "/src/styles/variables/@_main.scss";
+
+// mixins
+@import "/src/styles/mixins/@_main.scss";
+
+.page {
+  @include pageContainer;
+}
+
+.navbar {
+  height: $space-xl;
+  // add space between logo and user and align
+  @include fl("r", space-between, "c", $space-s);
+
+  h1 {
+    padding: 0 $space-xs;
+
+    background: var(--bg-sec);
+    border-radius: $radius;
+
+    // make astronaut and username aligned
+    @include fl("r", null, "c", $space-2xs);
+
+    // astronaut logo
+    svg {
+      font-size: $step-2;
+      color: var(--fg-pri);
+    }
+  }
+}
+
+.home {
+  width: 100%;
+  padding: $space-3xs-2xs;
+
+  .projects {
+    padding: $space-3xs-2xs;
+    @include fl("c", null, null, $space-s);
+  }
+}
+
+.heading {
+  @include fl("r", space-between, null, $space-3xs);
+  flex-wrap: wrap;
+
+  .headingButtons {
+    margin-left: auto;
+    @include fl("r", "c", "c", $space-2xs);
+  }
+
+  // refresh button
+  .refresh {
+    @include fl("r", "c", "c", $space-3xs);
+
+    border-radius: $radius;
+
+    @include linkButton2;
+  }
+
+  // add project button
+  a {
+    @include fl("r", "c", "c", $space-2xs);
+    svg {
+      font-size: $step-1;
+    }
+  }
+}
+
+// hide user in mobile
+@media (max-width: 360px) {
+  .navbar {
+    h1 {
+      display: none;
+    }
+  }
+  .heading {
+    // hide refresh and add project text
+    .refresh,
+    a {
+      span {
+        display: none;
+      }
+    }
+  }
+}

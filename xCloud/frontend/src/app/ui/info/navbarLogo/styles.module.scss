@@ -1,0 +1,16 @@
+.logo {
+  height: 100%;
+  position: relative;
+  aspect-ratio: 415/162;
+
+  img {
+    object-fit: contain;
+  }
+}
+
+// make width responsive on mobile
+@media (max-width: 170px) {
+  .logo {
+    width: 100%;
+  }
+}

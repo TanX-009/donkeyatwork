@@ -1,0 +1,37 @@
+// variables
+@import "/src/styles/variables/@_main.scss";
+
+// mixins
+@import "/src/styles/mixins/@_main.scss";
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loading {
+  width: 1em;
+  height: 1em;
+
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  border: $border var(--fg-pri);
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+
+  span {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    left: 0.09em;
+    top: 0.09em;
+    border: $border var(--txt);
+    width: 0.25em;
+    height: 0.25em;
+    border-radius: 50%;
+  }
+}

@@ -1,0 +1,14 @@
+@mixin pageContainer {
+  width: 100%;
+  max-width: 1440px;
+  padding: 0 $space-s-m;
+  font-size: $step-0;
+}
+
+@mixin formContainer {
+  width: 100%;
+  max-width: 360px;
+  font-size: $step-0;
+
+  @include fl("c", null, null, 0);
+}

@@ -1,36 +1,24 @@
 "use client";
 
 import React, { useContext, useEffect, useState } from "react";
+import styles from "./styles.module.scss";
 import { Context } from "./layout";
 import { useRouter } from "next/navigation";
 import Redirecting from "../ui/misc/redirecting";
-import { getData } from "../lib/data/getData";
-import SubmitInput from "../ui/form/submit";
-import { formPost } from "../lib/form/post";
-
-async function submitForm(file, body = {}) {
-  const formData = new FormData();
-  formData.append("file", file);
-  formData.append("data", JSON.stringify(body));
-  formPost(
-    "/addProject",
-    formData,
-    (data) => {
-      console.log(data);
-    },
-    (data) => {
-      console.log(data);
-    },
-  );
-}
+import NavbarLogo from "../ui/info/navbarLogo";
+import { GiAstronautHelmet } from "react-icons/gi";
+import { TiCloudStorage } from "react-icons/ti";
+import { IoRefresh } from "react-icons/io5";
+import { getSecureData } from "../lib/data/getData";
+import ProjectCard from "./ui/projectCard";
+import LinkButton from "../ui/clickables/linkButton";
 
 export default function Home() {
   const router = useRouter();
   const { context } = useContext(Context);
 
-  const [projectFile, setProjectFile] = useState(null);
-  const [test, setTest] = useState();
-  console.log(test);
+  const [projects, setProjects] = useState([]);
+  const [tick, updateTick] = useState(true);
 
   useEffect(() => {
     if (!context.user.token) {
@@ -41,31 +29,66 @@ export default function Home() {
     return <Redirecting />;
   }
 
+  useEffect(() => {
+    setProjects([]);
+    getSecureData(
+      "/manage/get_projects/" + context.user._id,
+      setProjects,
+      context.user.token,
+      {
+        user: context.user,
+      },
+    );
+  }, [tick]);
+
   return (
-    <div>
-      <h1>Hello</h1>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          submitForm(projectFile, { asdf: "asdf" });
-        }}
-      >
-        <input
-          type="file"
-          accept=".zip"
-          name="projectFile"
-          required={true}
-          onChange={(e) => setProjectFile(e.target.files[0])}
-        />
-        <SubmitInput value="Upload" variant="single" />
-      </form>
-      <button
-      // onClick={() => {
-      //   getData("/addProject", setTest, { asdf: "asdf" });
-      // }}
-      >
-        Get
-      </button>
+    <div className={styles.page}>
+      {/* navbar */}
+      <div className={styles.navbar}>
+        {/* logo */}
+        <NavbarLogo />
+
+        {/* user */}
+        <h1>
+          <GiAstronautHelmet /> {context.user.username}
+        </h1>
+      </div>
+
+      {/* home page */}
+      <div className={styles.home}>
+        <div className={styles.heading}>
+          <h1>Projects</h1>
+
+          <div className={styles.headingButtons}>
+            {/* refresh button */}
+            <button
+              className={styles.refresh}
+              onClick={() => {
+                updateTick((val) => !val);
+              }}
+            >
+              <IoRefresh />
+              <span>Refresh</span>
+            </button>
+
+            {/* add project button */}
+            <LinkButton
+              path="/add_project"
+              name={
+                <>
+                  <TiCloudStorage /> <span>Add project</span>
+                </>
+              }
+              variant="single"
+            />
+          </div>
+        </div>
+        <div className={styles.projects}>
+          {projects.map((project, key) => (
+            <ProjectCard key={key} project={project} updateTick={updateTick} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

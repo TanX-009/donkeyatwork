@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
-const { query } = require("../../db");
 const { getToken } = require("../../common/Auth");
+const { query } = require("../../db");
 const saltRounds = 10;
 
 module.exports.login = async (req, res) => {
@@ -92,7 +92,7 @@ module.exports.register = async (req, res) => {
     await bcrypt
       .genSalt(saltRounds)
       .then((salt) => {
-        return bcrypt.hash(req.body.secretAnswer, salt);
+        return bcrypt.hash(req.body.secretanswer, salt);
       })
       .then((hash) => {
         secretAnsHash = hash;
@@ -100,13 +100,14 @@ module.exports.register = async (req, res) => {
       .catch((err) => console.error(err.message));
 
     await query(
-      `INSERT INTO account(username, password, secretQuestion, secretAnswer, token) VALUES ('${req.body.username}', '${passHash}', '${req.body.secretQuestion}', '${secretAnsHash}', '');`,
+      `INSERT INTO account(username, password, secretquestion, secretanswer, token) VALUES ('${req.body.username}', '${passHash}', '${req.body.secretquestion}', '${secretAnsHash}', '');`,
     );
 
     return res
       .status(200)
       .json({ msg: "Registered sucessfully", status: "SUCESS" });
   } catch (error) {
+    console.log(error);
     return res.status(400).json({
       error: "Error while registring",
       status: "FAILED",

@@ -5,30 +5,34 @@
 @import "/src/styles/variables/@_main.scss";
 
 .passwordInput {
-  @include fl("c", null, null, 0);
-  height: calc($space-2xs + $space-2xs + $step-2);
-
   label {
     @include label;
   }
 }
 
+// input and eye container
 .inputContainer {
-  position: relative;
-  @include fl("r");
-  height: 100%;
+  // make the container look like input
+  @include input;
+  // override padding from the mixin
+  padding: 0;
+
+  // divide input and svg in parts using flex
+  @include fl("r", "c", "c", 0);
 
   input {
     @include input;
+    // override the input mixin to remove nested borders and background
+    background: none;
+    border: none;
+    outline: none;
 
-    position: absolute;
-    padding-right: calc($step-2 + $space-xs);
-    width: 100%;
+    width: 85%;
   }
 
   svg {
-    position: absolute;
-    right: $space-xs;
-    transform: translateY(50%);
+    // equalize padding between by adding right padding
+    padding-right: $space-2xs;
+    width: 15%;
   }
 }

@@ -5,28 +5,14 @@
 @import "/src/styles/mixins/@_main.scss";
 
 .login {
-  width: 100%;
-  max-width: 360px;
-  padding: $space-s;
-  font-size: $step-1;
-  margin: $space-l auto;
+  @include pageContainer;
 
   @include fl("c", flex-start, "c");
 
   form {
-    width: 100%;
-    @include fl("c", null, null, 0);
-  }
-}
-
-.logo {
-  width: 100%;
-  max-width: 360px;
-  position: relative;
-  aspect-ratio: 415/162;
-
-  img {
-    object-fit: contain;
+    margin: $space-l auto;
+    @include formContainer;
+    font-size: $step-1;
   }
 }
 

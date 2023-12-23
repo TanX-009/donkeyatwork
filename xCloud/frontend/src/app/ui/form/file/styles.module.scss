@@ -1,0 +1,40 @@
+// mixins
+@import "/src/styles/mixins/@_main.scss";
+
+// variables
+@import "/src/styles/variables/@_main.scss";
+
+.fileInput {
+  width: 100%;
+  position: relative;
+
+  @include input;
+  input[type="file"] {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+
+    // hide the input but keep the onClick working without label
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    filter: opacity(0);
+    -ms-filter: opacity(0);
+    -webkit-filter: opacity(0);
+  }
+}
+
+.fakeInput {
+  @include fl("r", null, "c", $space-2xs);
+  pointer-events: none;
+
+  .button {
+    @include submit;
+
+    border-radius: $space-3xs;
+    background: var(--fg-pri);
+    padding: $space-3xs;
+    text-align: center;
+  }
+}

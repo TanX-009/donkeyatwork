@@ -1,0 +1,10 @@
+.logo {
+  width: 100%;
+  max-width: 360px;
+  position: relative;
+  aspect-ratio: 415/162;
+
+  img {
+    object-fit: contain;
+  }
+}

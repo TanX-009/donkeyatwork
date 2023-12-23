@@ -38,13 +38,23 @@ async function formPost(link, formData, onSucess, onElse, onError = null) {
 async function formSecurePost(
   link,
   formData,
+  token,
   onSucess,
   onElse,
   onError = null,
 ) {
   try {
     await axios
-      .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}${link}`, formData)
+      .post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}${link}`,
+        formData,
+
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      )
       .then((res) => {
         // console.log(res.data.msg);
         if (res.data.status === "SUCESS") {

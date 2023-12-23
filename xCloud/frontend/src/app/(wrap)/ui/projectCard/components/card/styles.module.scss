@@ -1,0 +1,57 @@
+// variables
+@import "/src/styles/variables/@_main.scss";
+
+// mixins
+@import "/src/styles/mixins/@_main.scss";
+
+.projectCard {
+  width: 100%;
+  padding: $space-2xs $space-s;
+  border-radius: $radius;
+  background: var(--bg-sec);
+
+  @include fl("r", space-between, "c", $space-2xs-xs);
+  flex-wrap: wrap;
+
+  h2 {
+    font-size: $step-1;
+  }
+}
+
+.controls {
+  font-size: $step-1;
+
+  @include fl("r", null, "c", $space-2xs-xs);
+
+  // center the icons
+  button {
+    font-size: inherit;
+    @include fl("r", null, "c");
+
+    // style all the buttons in controls
+    padding: $space-3xs;
+    background: var(--bg-pri-a);
+    border-radius: calc($radius / 2);
+    cursor: pointer;
+
+    // remove default button styling
+    border: none;
+    outline: none;
+
+    &:hover {
+      background: var(--bg-pri);
+    }
+  }
+}
+
+.button {
+  color: var(--txt);
+}
+
+.deleteButton {
+  color: var(--red);
+}
+
+.exclaim {
+  color: var(--yellow);
+}

@@ -1,0 +1,14 @@
+// variables
+@import "/src/styles/variables/@_main.scss";
+
+// mixins
+@import "/src/styles/mixins/@_main.scss";
+
+.home {
+  @include pageContainer;
+
+  form {
+    @include formContainer;
+    margin: 0 auto;
+  }
+}
