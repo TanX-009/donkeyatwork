@@ -19,7 +19,6 @@
   .no {
     @include linkButton2;
     @include fl("r", "c", "c");
-    border-radius: $radius;
   }
 
   .yes {

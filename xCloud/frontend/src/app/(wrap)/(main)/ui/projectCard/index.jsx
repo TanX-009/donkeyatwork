@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import DeleteConfirmationPrompt from "./components/prompt";
 import Card from "./components/card";
 import DeleteFailedRes from "./components/failedRes";
-import { Context } from "../../layout";
+import { Context } from "../../../layout";
 import { formSecurePost } from "@/src/app/lib/form/post";
 
 async function deleteProject(setFailedRes, project, user, updateTick) {

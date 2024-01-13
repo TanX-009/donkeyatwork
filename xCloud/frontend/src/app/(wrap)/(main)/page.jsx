@@ -2,16 +2,14 @@
 
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
-import { Context } from "./layout";
 import { useRouter } from "next/navigation";
-import Redirecting from "../ui/misc/redirecting";
-import NavbarLogo from "../ui/info/navbarLogo";
-import { GiAstronautHelmet } from "react-icons/gi";
 import { TiCloudStorage } from "react-icons/ti";
 import { IoRefresh } from "react-icons/io5";
-import { getSecureData } from "../lib/data/getData";
 import ProjectCard from "./ui/projectCard";
-import LinkButton from "../ui/clickables/linkButton";
+import Redirecting from "../../ui/misc/redirecting";
+import { getSecureData } from "../../lib/data/getData";
+import LinkButton from "../../ui/clickables/linkButton";
+import { Context } from "../layout";
 
 export default function Home() {
   const router = useRouter();
@@ -43,17 +41,6 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      {/* navbar */}
-      <div className={styles.navbar}>
-        {/* logo */}
-        <NavbarLogo />
-
-        {/* user */}
-        <h1>
-          <GiAstronautHelmet /> {context.user.username}
-        </h1>
-      </div>
-
       {/* home page */}
       <div className={styles.home}>
         <div className={styles.heading}>
@@ -62,7 +49,8 @@ export default function Home() {
           <div className={styles.headingButtons}>
             {/* refresh button */}
             <button
-              className={styles.refresh}
+              // style and radius variant
+              className={`${styles.refresh} ${styles.single}`}
               onClick={() => {
                 updateTick((val) => !val);
               }}

@@ -7,8 +7,16 @@
 .home {
   @include pageContainer;
 
+  h1 {
+    @include fl("r", flex-start, "c", $space-2xs);
+  }
+
   form {
-    @include formContainer;
-    margin: 0 auto;
+    width: 100%;
+    input,
+    select,
+    div {
+      max-width: 360px;
+    }
   }
 }

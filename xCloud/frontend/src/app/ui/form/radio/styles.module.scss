@@ -1,0 +1,31 @@
+// variables
+@import "/src/styles/variables/@_main.scss";
+
+// mixins
+@import "/src/styles/mixins/@_main.scss";
+
+.radio {
+  width: 100%;
+  padding: $space-2xs;
+
+  @include fl(r, space-between, c, $space-2xs);
+
+  background: var(--bg-sec);
+  border: $border var(--bg-ter);
+  border-radius: $radius;
+
+  // buttons
+  div {
+    @include fl(r, c, c, $space-2xs);
+  }
+}
+
+// selected toggle
+.selected {
+  @include linkButton;
+}
+
+// unselected toggle
+.unSelected {
+  @include linkButton2;
+}

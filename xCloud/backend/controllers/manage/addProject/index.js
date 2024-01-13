@@ -20,7 +20,7 @@ async function response(req, res, inputFields, network_id, main_container_id) {
   // add project to the database
   await query(`
     INSERT INTO projects (account_id, project_name, network_id, main_container_id)
-    VALUES ('${inputFields.user._id}', '${inputFields.project_name}', '${network_id}', '${main_container_id}');
+    VALUES ('${inputFields.user._id}', '${inputFields.main.project_name}', '${network_id}', '${main_container_id}');
   `);
 
   // return response to user
@@ -60,10 +60,10 @@ function createContainer(
   const containerOptions = {
     Image: dockerImageName,
     Cmd: ["npm", "run", "start"],
-    ExposedPorts: { [`${inputFields.main_port}/tcp`]: {} },
+    ExposedPorts: { [`${inputFields.main.port}/tcp`]: {} },
     HostConfig: {
       PortBindings: {
-        [`${inputFields.main_port}/tcp`]: [{ HostPort: "0" }],
+        [`${inputFields.main.port}/tcp`]: [{ HostPort: "0" }],
       },
       NetworkMode: projectName,
     },
@@ -149,7 +149,7 @@ function monitorBuildProcess(
 function buildImage(req, res, tempDirName, inputFields) {
   // create unique projectname
   const projectName =
-    `${inputFields.user.username}${inputFields.user._id}${inputFields.project_name}`.replace(
+    `${inputFields.user.username}${inputFields.user._id}${inputFields.main.project_name}`.replace(
       " ",
       "",
     );
@@ -191,7 +191,7 @@ function createDockerfile(tempDirName, inputFields) {
     COPY package*.json ./
     RUN npm install
     COPY . .
-    EXPOSE ${inputFields.main_port}
+    EXPOSE ${inputFields.main.port}
     CMD ["npm", "run", "start"]
   `;
 
@@ -261,7 +261,7 @@ module.exports = async (req, res) => {
         WHERE 
           account_id = '${inputFields.user._id}' 
           AND 
-          project_name = '${inputFields.project_name}';`,
+          project_name = '${inputFields.main.project_name}';`,
     );
 
     // if the project exists, return

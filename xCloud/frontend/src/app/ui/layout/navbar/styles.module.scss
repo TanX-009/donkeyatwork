@@ -1,0 +1,45 @@
+// variables
+@import "/src/styles/variables/@_main.scss";
+
+// mixins
+@import "/src/styles/mixins/@_main.scss";
+
+.navbar {
+  height: calc($step-2 + $space-3xs + $space-l);
+  width: 100%;
+  max-width: 1440px;
+
+  padding: 0 $space-s-m;
+  font-size: $step-0;
+
+  // add space between logo and user and align
+  @include fl("r", space-between, "c", $space-s);
+
+  h1 {
+    padding: $space-4xs $space-xs;
+
+    background: var(--bg-sec);
+    border-radius: $radius;
+
+    // make astronaut and username aligned
+    @include fl("r", null, "c", $space-2xs);
+
+    // astronaut logo
+    svg {
+      font-size: $step-2;
+      color: var(--fg-pri);
+    }
+  }
+}
+
+// hide user in mobile
+@media (max-width: 360px) {
+  .navbar {
+    h1 {
+      padding: $space-3xs $space-2xs;
+      span {
+        display: none;
+      }
+    }
+  }
+}

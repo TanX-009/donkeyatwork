@@ -1,8 +1,7 @@
 // variables
 @import "/src/styles/variables/@_main.scss";
 
-.failedResponse {
+.requirement {
   font-size: inherit;
-  color: var(--red);
-  text-align: center;
+  color: var(--fg-sec);
 }

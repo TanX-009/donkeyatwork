@@ -1,6 +1,7 @@
 /* @link https://utopia.fyi/space/calculator?c=320,18,1.2,1240,20,1.25,5,2,&s=0.75|0.5,1.5|2|3|4|6,&g=s,l,xl,12 */
 
 /* -------------------- Space -------------------- */
+$space-4xs: clamp(0.1875rem, 0.1875rem + 0vw, 0.1875rem);
 $space-3xs: clamp(0.3125rem, 0.3125rem + 0vw, 0.3125rem);
 $space-2xs: clamp(0.5625rem, 0.5408rem + 0.1087vw, 0.625rem);
 $space-xs: clamp(0.875rem, 0.8533rem + 0.1087vw, 0.9375rem);
@@ -12,6 +13,7 @@ $space-2xl: clamp(4.5rem, 4.3261rem + 0.8696vw, 5rem);
 $space-3xl: clamp(6.75rem, 6.4891rem + 1.3043vw, 7.5rem);
 
 // One-up pairs
+$space-4xs-3xs: clamp(0.1875rem, 0.144rem + 0.2174vw, 0.3125rem);
 $space-3xs-2xs: clamp(0.3125rem, 0.2038rem + 0.5435vw, 0.625rem);
 $space-2xs-xs: clamp(0.5625rem, 0.4321rem + 0.6522vw, 0.9375rem);
 $space-xs-s: clamp(0.875rem, 0.7446rem + 0.6522vw, 1.25rem);

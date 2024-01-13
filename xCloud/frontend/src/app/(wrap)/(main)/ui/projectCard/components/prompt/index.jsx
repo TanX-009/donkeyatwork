@@ -10,7 +10,8 @@ export default function DeleteConfirmationPrompt({ onYes, onNo }) {
       <span>Do you really want to delete this project?</span>
       <div className={styles.confirmationBtns}>
         <button
-          className={styles.yes}
+          // styling and radius variant
+          className={`${styles.yes} ${styles.single}`}
           onClick={() => {
             if (clickable) {
               onYes();
@@ -21,7 +22,8 @@ export default function DeleteConfirmationPrompt({ onYes, onNo }) {
           {clickable ? "Yes" : <Loading />}
         </button>
         <button
-          className={styles.no}
+          // styling and radius variant
+          className={`${styles.no} ${styles.single}`}
           onClick={() => {
             if (clickable) {
               onNo();
