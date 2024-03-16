@@ -221,7 +221,7 @@ function handleDecompression(req, res, tempDirName, inputFields) {
     rmSync(tempDirName, { recursive: true });
     return res
       .status(201)
-      .json({ msg: "'package.json' doesn't exists directly in the zip" });
+      .json({ msg: "'package.json' doesn't exist directly in the zip" });
   }
 
   // get start script from package.json
