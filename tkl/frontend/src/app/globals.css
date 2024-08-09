@@ -1,0 +1,53 @@
+/* Base reset */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* box-sizing and font sizing */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+
+  /* transition: all 0.3s ease-out; */
+  /* -webkit-transition: all 0.3s ease-out; */
+  /* -moz-transition: all 0.3s ease-out; */
+  /* -o-transition: all 0.3s ease-out; */
+}
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.button {
+  padding: 0.3rem 0.5rem;
+  border: 0.08rem solid gray;
+
+  font-size: 1rem;
+  text-decoration: none;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: black;
+  background: lightgray;
+
+  cursor: pointer;
+}
+
+input {
+  padding: 0.3rem 0.5rem;
+  border: 0.08rem solid gray;
+  font-size: 1rem;
+  text-decoration: none;
+}
