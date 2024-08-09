@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors');
 const sqlite3 = require("sqlite3").verbose();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -9,6 +10,7 @@ const port = 4000;
 const db = new sqlite3.Database("users.db");
 const SECRET_KEY = "your_jwt_secret_key"; // Change this to a secure key
 
+app.use(cors());
 app.use(bodyParser.json());
 
 // Initialize the database schema and create default admin
@@ -69,19 +71,28 @@ initDatabase();
 app.post("/register", (req, res) => {
   const { username, password } = req.body;
 
-  bcrypt.hash(password, 10, (err, hashedPassword) => {
-    if (err) return res.status(500).json({ message: "Error hashing password" });
-
-    db.run(
-      "INSERT INTO users (username, password) VALUES (?, ?)",
-      [username, hashedPassword],
-      function (err) {
-        if (err)
-          return res.status(500).json({ message: "Error registering user" });
-        res.status(201).json({ message: "User registered successfully" });
-      },
-    );
-  });
+  try {
+    bcrypt.hash(password, 10, (err, hashedPassword) => {
+      if (err) {
+        return res.status(500).json({ message: "Error hashing password" });
+      }
+  
+      db.run(
+        "INSERT INTO users (username, password) VALUES (?, ?)",
+        [username, hashedPassword],
+        function (err) {
+          
+          if (err) {
+            return res.status(500).json({ message: "User registered already!" });
+          }
+          res.status(201).json({ message: "User registered successfully" });
+        },
+      );
+    });
+  } catch(err) {
+    console.error(err)
+  }
+  
 });
 
 // Login endpoint
@@ -103,7 +114,7 @@ app.post("/login", (req, res) => {
         SECRET_KEY,
         { expiresIn: "1h" },
       );
-      res.json({ token });
+      res.json({ message: "Login SUCESS!", user: {name: username, token: token} });
     });
   });
 });
