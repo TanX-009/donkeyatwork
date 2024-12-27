@@ -51,7 +51,7 @@
     </style>
   </head>
   <body>
-    <h1>Barcode Scanner 0.4</h1>
+    <h1>Barcode Scanner 0.6</h1>
     <div id="scanner"></div>
     <textarea
       id="barcode-results"
@@ -69,7 +69,7 @@
         // Regex: Start with 4 letters followed by numbers only
         const isValid = /^[A-Za-z]{4}\d+$/.test(barcode);
 
-        if (!isValid) {
+        if (!isValid)
           console.log("Invalid barcode format:", barcode);
           return; // Skip invalid barcodes
         }
