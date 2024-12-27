@@ -31,7 +31,7 @@
     </style>
   </head>
   <body>
-    <h1>Barcode Scanner</h1>
+    <h1>Barcode Scanner 0.3</h1>
     <div id="scanner"></div>
     <textarea
       id="barcode-results"
@@ -45,6 +45,14 @@
       const scannedBarcodes = new Set(); // Set to track added barcodes
 
       function addBarcode(barcode) {
+        // Regex: Start with 4 letters, followed by alphanumeric characters only
+        const isValid = /^[A-Za-z]{4}[A-Za-z0-9]+$/.test(barcode);
+
+        if (!isValid) {
+          console.log("Invalid barcode format:", barcode);
+          return; // Skip invalid barcodes
+        }
+
         if (!scannedBarcodes.has(barcode)) {
           scannedBarcodes.add(barcode); // Add the barcode to the Set
           resultsTextArea.value += barcode + "\n"; // Append to the textarea
@@ -82,7 +90,7 @@
 
       Quagga.onDetected(function (data) {
         const barcode = data.codeResult.code;
-        addBarcode(barcode); // Add the barcode if not already added
+        addBarcode(barcode); // Validate and add the barcode
       });
     </script>
   </body>
