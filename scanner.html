@@ -31,8 +31,8 @@
         margin: 0 auto;
       }
       #scanner > video {
-        width: 100%;
         height: 100%;
+        width: fit-content;
       }
       #copy-button {
         padding: 0.5rem 1rem;
@@ -62,57 +62,69 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
     <script>
-      const resultsTextArea = document.getElementById("barcode-results");
-      const scannedBarcodes = new Set(); // Set to track added barcodes
+        const resultsTextArea = document.getElementById("barcode-results");
+        const scannedBarcodes = new Set(); // Set to track added barcodes
+        const copyButton = document.getElementById('copy-button');
 
-      function addBarcode(barcode) {
-        // Regex: Start with 4 letters followed by numbers only
-        const isValid = /^[A-Za-z]{4}\d+$/.test(barcode);
+        function addBarcode(barcode) {
+          // Regex: Start with 4 letters followed by numbers only
+          const isValid = /^[A-Za-z]{4}\d+$/.test(barcode);
 
-        if (!isValid)
-          console.log("Invalid barcode format:", barcode);
-          return; // Skip invalid barcodes
+          if (!isValid)
+            console.log("Invalid barcode format:", barcode);
+            return; // Skip invalid barcodes
+          }
+
+          if (!scannedBarcodes.has(barcode)) {
+            scannedBarcodes.add(barcode); // Add the barcode to the Set
+            resultsTextArea.value += barcode + "\n"; // Append to the textarea
+          } else {
+            console.log("Barcode already added:", barcode);
+          }
         }
 
-        if (!scannedBarcodes.has(barcode)) {
-          scannedBarcodes.add(barcode); // Add the barcode to the Set
-          resultsTextArea.value += barcode + "\n"; // Append to the textarea
-        } else {
-          console.log("Barcode already added:", barcode);
-        }
-      }
-
-      Quagga.init(
-        {
-          inputStream: {
-            name: "Live",
-            type: "LiveStream",
-            target: document.querySelector("#scanner"),
-            constraints: {
-              facingMode: { ideal: "environment" },
+        Quagga.init(
+          {
+            inputStream: {
+              name: "Live",
+              type: "LiveStream",
+              target: document.querySelector("#scanner"),
+              constraints: {
+                facingMode: { ideal: "environment" },
+              },
+            },
+            decoder: {
+              readers: [
+                "code_128_reader", // Common for shipping
+                "code_39_reader", // Common in logistics
+              ],
             },
           },
-          decoder: {
-            readers: [
-              "code_128_reader", // Common for shipping
-              "code_39_reader", // Common in logistics
-            ],
+          function (err) {
+            if (err) {
+              console.error("QuaggaJS Initialization Error:", err);
+              alert("Error initializing camera");
+              return;
+            }
+            Quagga.start();
           },
-        },
-        function (err) {
-          if (err) {
-            console.error("QuaggaJS Initialization Error:", err);
-            alert("Error initializing camera");
-            return;
-          }
-          Quagga.start();
-        },
-      );
+        );
 
-      Quagga.onDetected(function (data) {
-        const barcode = data.codeResult.code;
-        addBarcode(barcode); // Validate and add the barcode
-      });
+        Quagga.onDetected(function (data) {
+          const barcode = data.codeResult.code;
+          addBarcode(barcode); // Validate and add the barcode
+        });
+
+      // Copy button functionality
+          copyButton.addEventListener('click', () => {
+              navigator.clipboard.writeText(resultsTextArea.value)
+                  .then(() => {
+                      alert('Copied to clipboard!');
+                  })
+                  .catch(err => {
+                      console.error('Failed to copy text: ', err);
+                  });
+          });
     </script>
   </body>
 </html>
