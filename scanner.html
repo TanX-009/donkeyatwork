@@ -30,7 +30,8 @@
         height: 38%;
 
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        align-items: center;
       }
       #scanner > video {
         max-height: 100%;
@@ -57,7 +58,6 @@
     <div id="scanner"></div>
     <textarea
       id="barcode-results"
-      readonly
       placeholder="Scanned barcodes will appear here..."
     ></textarea>
     <button id="copy-button">Copy</button>
