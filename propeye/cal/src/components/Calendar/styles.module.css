@@ -1,0 +1,38 @@
+.calendar {
+  max-width: 700px;
+  margin: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.dayHeader {
+  font-weight: bold;
+  text-align: center;
+  padding: 8px;
+}
+
+.dayCell {
+  height: 80px;
+  border: 1px solid #ccc;
+  text-align: right;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.today {
+  background-color: #9ed2ffff;
+}
+
+.hasEvent {
+  background-color: #e0ffe0;
+}
